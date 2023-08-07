@@ -1,7 +1,7 @@
 # Dokumentasi
 
 ## struktur folder projek 
-| File                  | Description                                                                                                 |
+| File / Folder         | Description                                                                                                 |
 | --------------------- | ----------------------------------------------------------------------------------------------------------- |
 | result                | berisi screenshot dari hasil program                                                                        |
 | main.py               | berisi kode untuk menjalankan proses kalkulasi top 10 movie dan genres marketshare                          |
