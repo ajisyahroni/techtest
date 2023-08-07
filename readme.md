@@ -18,7 +18,7 @@
 1. buat folder ```db```, download file parquet https://drive.google.com/drive/folders/1jmBMkgX83ylr5POevb0HJHUd8NuPFlNL?usp=drive_link lalu masukkan ke folder db 
 2. ```python -m venv venv &&```
 3. ```source venv/bin/activate```
-4. ```pip: -r requirements.txt```
+4. ```pip -r requirements.txt```
 5. ```python main.py```
 6. ```cd web```
 7. ```npm install```
