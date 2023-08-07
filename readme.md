@@ -31,6 +31,7 @@
    - MySQL sebagai data source, hasilnya Database MySQL kurang cocok untuk menyelesaikan kasus ini dikarenakan data yang digunakan memiliki kapasitas yang cukup besar
    - Endpoint API sebagai data source, pendekatan ini menggunakan API sebagai data source, akan tetapi proses query dilakukan  disisi backend sehingga hasil kurang kredibel
    - JSON / CSV sebagai data source, data parquet dirubah kedalam JSON / CSV kendala pada tahapan ini adalah pada sisi query data
-solusi lain yang perlu dicoba adalah dengan menggunakan Clickhouse database sebagai data source.
+  
+  solusi lain yang perlu dicoba adalah dengan menggunakan Clickhouse database sebagai data source.
 
 3. source code visualisasi dalam bentuk web terdapat pada folder web/src
