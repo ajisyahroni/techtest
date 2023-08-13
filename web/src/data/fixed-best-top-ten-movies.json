@@ -1,0 +1,72 @@
+[
+  {
+    "movieId": 318,
+    "title": "Shawshank Redemption, The (1994)",
+    "rating_mean": 4.4469904996,
+    "num_votes": 63366,
+    "score": 4.4204599408
+  },
+  {
+    "movieId": 858,
+    "title": "Godfather, The (1972)",
+    "rating_mean": 4.3647321968,
+    "num_votes": 41355,
+    "score": 4.3270313704
+  },
+  {
+    "movieId": 50,
+    "title": "Usual Suspects, The (1995)",
+    "rating_mean": 4.3343722078,
+    "num_votes": 47006,
+    "score": 4.3019019145
+  },
+  {
+    "movieId": 527,
+    "title": "Schindler's List (1993)",
+    "rating_mean": 4.310175011,
+    "num_votes": 50054,
+    "score": 4.2802469878
+  },
+  {
+    "movieId": 1221,
+    "title": "Godfather: Part II, The (1974)",
+    "rating_mean": 4.2756405577,
+    "num_votes": 27398,
+    "score": 4.223661695
+  },
+  {
+    "movieId": 1193,
+    "title": "One Flew Over the Cuckoo's Nest (1975)",
+    "rating_mean": 4.248078979,
+    "num_votes": 29932,
+    "score": 4.2014688935
+  },
+  {
+    "movieId": 912,
+    "title": "Casablanca (1942)",
+    "rating_mean": 4.2583268307,
+    "num_votes": 24349,
+    "score": 4.2010518532
+  },
+  {
+    "movieId": 2959,
+    "title": "Fight Club (1999)",
+    "rating_mean": 4.2271231237,
+    "num_votes": 40106,
+    "score": 4.1926249709
+  },
+  {
+    "movieId": 904,
+    "title": "Rear Window (1954)",
+    "rating_mean": 4.2713336008,
+    "num_votes": 17449,
+    "score": 4.1920813273
+  },
+  {
+    "movieId": 750,
+    "title": "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb (1964)",
+    "rating_mean": 4.2472868217,
+    "num_votes": 23220,
+    "score": 4.1879631939
+  }
+]

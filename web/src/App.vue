@@ -3,7 +3,7 @@
 import { ref } from 'vue';
 
 // @ts-ignore
-import TopTen from './data/best-top-ten-movies.json' // @ts-ignore
+import TopTen from './data/fixed-best-top-ten-movies.json' // @ts-ignore
 import GenresMarketShare from './data/genres-market-share.json'
 
 const chartOptions = ref({
@@ -14,7 +14,7 @@ const chartOptions = ref({
 
     type: "pie",
   },
-  
+
   xaxis: {
     categories: Object.keys(GenresMarketShare),
   },
@@ -40,7 +40,7 @@ const series = ref(Object.values(GenresMarketShare))
                       <th>#</th>
                       <th>Title</th>
                       <th>Avg Rating</th>
-                      <th>Viewers</th>
+                      <th>Rate count</th>
                     </tr>
                   </thead>
 
@@ -48,8 +48,8 @@ const series = ref(Object.values(GenresMarketShare))
                     <tr v-for="movie in TopTen">
                       <td></td>
                       <td>{{ movie.title }}</td>
-                      <td>{{ movie.avg_rating }}</td>
-                      <td>{{ movie.jumlah_reviewer }}</td>
+                      <td>{{ movie.score }}</td>
+                      <td>{{ movie.num_votes }}</td>
                     </tr>
 
                   </tbody>
