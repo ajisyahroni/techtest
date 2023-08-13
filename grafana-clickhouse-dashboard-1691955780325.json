@@ -134,7 +134,7 @@
         ]
       },
       "gridPos": {
-        "h": 16,
+        "h": 20,
         "w": 11,
         "x": 13,
         "y": 0
@@ -204,6 +204,111 @@
         "type": "grafana-clickhouse-datasource",
         "uid": "a9c2939a-88df-4e34-a988-f2e8a5938855"
       },
+      "description": "Jumlah Film Per Dekade",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 7,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 4
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "a9c2939a-88df-4e34-a988-f2e8a5938855"
+          },
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "fields": [],
+              "limit": 100,
+              "mode": "list"
+            }
+          },
+          "queryType": "sql",
+          "rawSql": "-- belajar\nwith MOVIE_WITH_DECADE AS (\n    select\n        movieId,\n        title,\n        toInt64OrZero(\n            concat(\n                toString(\n                    intDiv(\n                        toInt64OrZero(\n                            replace(\n                                replace(\n                                    splitByWhitespace(assumeNotNull(title)) [-1],\n                                    '(',\n                                    ''\n                                ),\n                                ')',\n                                ''\n                            )\n                        ),\n                        10\n                    )\n                ),\n                '0'\n            )\n        ) as decade\n    from\n        movies\n    where\n        decade != 0\n)\nSELECT\n    decade,\n    count(*) as jumlah_film\nFROM\n    MOVIE_WITH_DECADE\nGROUP BY\n    decade\nORDER BY decade",
+          "refId": "A",
+          "selectedFormat": 4
+        }
+      ],
+      "title": "Jumlah Film Per Dekade",
+      "transparent": true,
+      "type": "trend"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "a9c2939a-88df-4e34-a988-f2e8a5938855"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -237,7 +342,7 @@
         "h": 16,
         "w": 12,
         "x": 0,
-        "y": 4
+        "y": 12
       },
       "id": 1,
       "options": {
@@ -345,7 +450,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 20
+        "y": 28
       },
       "id": 3,
       "options": {
@@ -409,6 +514,6 @@
   "timezone": "",
   "title": "movie limit 3",
   "uid": "fe6d2083-ed89-4465-9583-e19ababeadf5",
-  "version": 11,
+  "version": 13,
   "weekStart": ""
 }
