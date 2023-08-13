@@ -21,17 +21,16 @@ df_rating = pd.read_parquet('./db/rating.parquet')
 # JOINING DATA 
 df = pd.merge(df_movie, df_rating , on=['movieId'], how='inner', validate='one_to_many')
 
+def set_score (df : pd.DataFrame, var = .8) : 
+    agg = df.groupby(['movieId', 'title'], as_index=False).agg({'rating' :['mean','count']  })
+    agg.columns  = ['movieId', 'title', 'rating_mean', 'num_votes']
+    v = agg['num_votes']
+    R = agg['rating_mean']
+    C = R.mean()
+    m = agg['num_votes'].quantile(var)
+    agg['score'] = (v/(v+m)*R + m/(v+m)*C) #rumus IMDB
+    return agg
 
-# AGGREGATE
-x = df.groupby('movieId', as_index=False).agg({'rating' :['mean','count']  }).reset_index()
-
-# Memberi score dari masing-masing film
-v = x['rating']['count']
-R = x['rating']['mean']
-C = R.mean()
-m = x['rating']['count'].quantile(0.8)
-x['score'] = (v/(v+m)*R + m/(v+m)*C) #rumus IMDB
-
-topMovie = x.sort_values(by=['score'], ascending=False).head(10)
-
-print(topMovie)
+top_ten_movies = set_score(df).sort_values(by=['score'], ascending=False).head(10)
+top_ten_movies.to_json('result/res_top_ten.json', orient='records')
+print(top_ten_movies)
