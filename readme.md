@@ -26,12 +26,13 @@
 
 
 ## Catatan 
-1. source code task visualisasi menggunakan python matplotlib terdapat pada file main.py
-2. visualisasi dengan Grafana terkendala secara teknis (penyimpanan storage penuh), sehingga mohon maaf dengan besar hati task ini tidak dapat terselesaikan. terdapat 3 pendekatan yang sudah dilakukan untuk menyelesaikan task ini yaitu :
-   - MySQL sebagai data source, hasilnya Database MySQL kurang cocok untuk menyelesaikan kasus ini dikarenakan data yang digunakan memiliki kapasitas yang cukup besar
-   - Endpoint API sebagai data source, pendekatan ini menggunakan API sebagai data source, akan tetapi proses query dilakukan  disisi backend sehingga hasil kurang kredibel
-   - JSON / CSV sebagai data source, data parquet dirubah kedalam JSON / CSV kendala pada tahapan ini adalah pada sisi query data
-  
-  solusi lain yang perlu dicoba adalah dengan menggunakan Clickhouse database sebagai data source.
-
+1. source code task visualisasi menggunakan python matplotlib terdapat pada file main.py (lama) atau fix_top_ten_movies.py (terbaru)
+2. Hasil implementasi disajikan pada dokumen https://docs.google.com/document/d/1O4J8UHHgdVMsrUaKZyg7pfCytCigbMAYJgAhwboVeyQ/edit?usp=sharing
 3. source code visualisasi dalam bentuk web terdapat pada folder web/src
+
+
+## Catatan Installasi 
+untuk menjalankan visualisasi dengan grafana cek pada [Tahapan Installasi Docker Grafana Clickhouse](installation.md)
+
+untuk memperoleh hasil query yang sama gunakan query pada file-file *.sql
+gunakan file json grafana ['File JSON Dashboard Grafana'](grafana-clickhouse-dashboard-1691955780325.json) untuk mengimport dashboard

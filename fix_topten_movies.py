@@ -28,10 +28,12 @@ def set_score (df : pd.DataFrame, var = .8) :
     R = agg['rating_mean']
     C = R.mean()
     m = agg['num_votes'].quantile(var)
+    print(f'C = {C}, m = {m}')
     agg['score'] = (v/(v+m)*R) + (m/(v+m)*C) #rumus IMDB
     return agg
 
-top_ten_movies = set_score(df,.9).sort_values(by=['score'], ascending=False).head(10)
+top_ten_movies = set_score(df,.8).sort_values(by=['score'], ascending=False).head(10)
 top_ten_movies.to_json(r'./web/src/data/fixed-best-top-ten-movies.json', orient='records')
 
-print(top_ten_movies[['movieId','num_votes', 'score']])
+print(top_ten_movies[['title','num_votes', 'score']])
+# print(df.shape)

@@ -39,8 +39,8 @@ const series = ref(Object.values(GenresMarketShare))
                     <tr>
                       <th>#</th>
                       <th>Title</th>
-                      <th>Avg Rating</th>
-                      <th>Rate count</th>
+                      <th style="text-align: right;">Score</th>
+                      <th style="text-align: right;">Rata-rata Voters</th>
                     </tr>
                   </thead>
 
@@ -48,8 +48,8 @@ const series = ref(Object.values(GenresMarketShare))
                     <tr v-for="movie in TopTen">
                       <td></td>
                       <td>{{ movie.title }}</td>
-                      <td>{{ movie.score }}</td>
-                      <td>{{ movie.num_votes }}</td>
+                      <td style="text-align: right;">{{ movie.score }}</td>
+                      <td style="text-align: right;">{{ movie.num_votes }}</td>
                     </tr>
 
                   </tbody>

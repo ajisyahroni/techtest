@@ -1,0 +1,414 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 5,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "a9c2939a-88df-4e34-a988-f2e8a5938855"
+      },
+      "description": "Jumlah Film Pada Database",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "a9c2939a-88df-4e34-a988-f2e8a5938855"
+          },
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "fields": [],
+              "limit": 100,
+              "mode": "list"
+            }
+          },
+          "queryType": "sql",
+          "rawSql": "select count(*) from movies;\n",
+          "refId": "A",
+          "selectedFormat": 4
+        }
+      ],
+      "title": "Jumlah Film",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "a9c2939a-88df-4e34-a988-f2e8a5938855"
+      },
+      "description": "market share",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "jumlah"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "palette-classic"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 16,
+        "w": 11,
+        "x": 13,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true,
+          "values": [
+            "percent"
+          ]
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "/^jumlah$/",
+          "limit": 100,
+          "values": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "builderOptions": {
+            "database": "default",
+            "fields": [],
+            "filters": [],
+            "limit": 100,
+            "mode": "list",
+            "orderBy": [],
+            "table": "movies"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "a9c2939a-88df-4e34-a988-f2e8a5938855"
+          },
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "database": "default",
+              "fields": [],
+              "filters": [],
+              "limit": 100,
+              "mode": "list",
+              "orderBy": [],
+              "table": "movies"
+            }
+          },
+          "queryType": "sql",
+          "rawSql": "-- MARKET SHARE\nWITH MOVIE_WITH_CAT AS (\n    SELECT\n        movieId,\n        title,\n        genres,\n        splitByString('|', assumeNotNull(genres)) as categories\n    from\n        movies\n),\nCATEGORIES AS (\n    SELECT\n        groupUniqArrayArray(categories) AS unique_category\n    FROM\n        MOVIE_WITH_CAT\n)\nSELECT\n    categories as kategori,\n    count(categories) as jumlah\nfrom\n    MOVIE_WITH_CAT array\n    join categories\ngroup by\n    categories\n    ",
+          "refId": "A",
+          "selectedFormat": 4
+        }
+      ],
+      "title": "Presentase Pangsa Pasar Per Kategori",
+      "transparent": true,
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "a9c2939a-88df-4e34-a988-f2e8a5938855"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 16,
+        "w": 12,
+        "x": 0,
+        "y": 4
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "lg",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "builderOptions": {
+            "database": "default",
+            "fields": [
+              "title",
+              "genres"
+            ],
+            "filters": [],
+            "limit": 3,
+            "mode": "list",
+            "orderBy": [],
+            "table": "movies"
+          },
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "a9c2939a-88df-4e34-a988-f2e8a5938855"
+          },
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "database": "default",
+              "fields": [
+                "title",
+                "genres"
+              ],
+              "filters": [],
+              "limit": 3,
+              "mode": "list",
+              "orderBy": [],
+              "table": "movies"
+            }
+          },
+          "queryType": "sql",
+          "rawSql": "-- IMDB SCORE\nWITH MOVIES_RATING AS (\n    SELECT\n        r.userId,\n        r.rating,\n        m.movieId AS movieId,\n        m.title,\n        m.genres\n    FROM\n        ratings r\n        INNER JOIN movies m ON r.movieId = m.movieId\n),\nRATING_MEAN AS (\n    SELECT\n        AVG(rating) as rating_avg\n    from\n        MOVIES_RATING\n    group by\n        movieId\n),\nTOP_TEN AS (\n    SELECT\n        title,\n        count(userId) as num_votes,\n        -- v --\n        avg(rating) as rating_mean,\n        -- R --\n        (\n            select\n                AVG(rating_avg)\n            from\n                RATING_MEAN\n        ) as C,\n        (num_votes /(num_votes + 346.0) * rating_mean) + (346.0 /(num_votes + 346.0) * C) as score\n    FROM\n        MOVIES_RATING\n    GROUP BY\n        movieId,\n        title\n    ORDER BY\n        score DESC\n    LIMIT\n        10\n)\nSELECT title, num_votes, score FROM TOP_TEN",
+          "refId": "A",
+          "selectedFormat": 4
+        }
+      ],
+      "title": "Top 10 Movies All of the times",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "grafana-clickhouse-datasource",
+        "uid": "a9c2939a-88df-4e34-a988-f2e8a5938855"
+      },
+      "description": "Jumlah Film Per Kategori",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 38,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "id": 3,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "colorByField": "kategori",
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-clickhouse-datasource",
+            "uid": "a9c2939a-88df-4e34-a988-f2e8a5938855"
+          },
+          "format": 1,
+          "meta": {
+            "builderOptions": {
+              "fields": [],
+              "limit": 100,
+              "mode": "list"
+            }
+          },
+          "queryType": "sql",
+          "rawSql": "WITH MOVIE_WITH_CAT AS (\n    SELECT\n        movieId,\n        title,\n        genres,\n        splitByString('|', assumeNotNull(genres)) as categories\n    from\n        movies\n),\nCATEGORIES AS (\n    SELECT\n        groupUniqArrayArray(categories) AS unique_category\n    FROM\n        MOVIE_WITH_CAT\n)\nSELECT\n    categories as kategori,\n    count(categories) as jumlah\nfrom\n    MOVIE_WITH_CAT array\n    join categories\ngroup by\n    categories",
+          "refId": "A",
+          "selectedFormat": 4
+        }
+      ],
+      "title": "Jumlah FIlm Per Kategori",
+      "type": "barchart"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "movie limit 3",
+  "uid": "fe6d2083-ed89-4465-9583-e19ababeadf5",
+  "version": 11,
+  "weekStart": ""
+}
